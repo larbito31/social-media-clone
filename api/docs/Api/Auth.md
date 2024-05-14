@@ -119,4 +119,22 @@ Refreshes the current token.
       }
       ```
 
+
+
+
+### GET /check-auth
+Check if the user is authenticated
+
+- **URL**: `/check-auth`
+- **Method**: `GET`
+- **Auth Required**: YES
+
+- **Success Response**:
+    - **Code**: 200 OK
+    - **Content**:
+      ```json
+      {
+      "isAuthenticated": true
+      }
+      ```
 ---

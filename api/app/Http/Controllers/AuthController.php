@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
+use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Cookie;
@@ -15,6 +16,11 @@ class AuthController extends Controller
 
     }
 
+    /**
+     * login
+     * @param Request $request
+     * @return JsonResponse
+     */
     public function login(Request $request)
     {
         $request->validate([
@@ -30,16 +36,19 @@ class AuthController extends Controller
                 'message' => 'Unauthorized',
             ], 401);
         }
-
         $user = Auth::user();
         $cookie = cookie('jwt', $token, 72000, null, null, false, true);
         return response()->json([
             'status' => 'ok',
             'token' => $token
         ])->withCookie($cookie);
-
     }
 
+    /**
+     * register
+     * @param Request $request
+     * @return JsonResponse
+     */
     public function register(Request $request){
         $request->validate([
             'name' => 'required|string|max:255',
@@ -62,6 +71,10 @@ class AuthController extends Controller
         ]);
     }
 
+    /**
+     * Logout
+     * @return JsonResponse
+     */
     public function logout()
     {
         Auth::logout();
@@ -72,6 +85,10 @@ class AuthController extends Controller
         ])->withCookie($cookie);
     }
 
+    /**
+     * refresh jwt
+     * @return JsonResponse
+     */
     public function refresh()
     {
         return response()->json([
@@ -79,5 +96,17 @@ class AuthController extends Controller
             'token' => Auth::refresh(),
         ]);
     }
+
+    /**
+     * we use this to check if the user is authenticated or not
+     * @return JsonResponse
+     */
+    public function checkAuth()
+    {
+            return response()->json([
+                'isAuthenticated' => true,
+            ]);
+    }
+
 
 }
