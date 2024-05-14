@@ -23,7 +23,7 @@
       <div class="relative mt-10 w-full">
         <!-- User Details -->
 
-        <form class="space-y-6">
+        <form class="space-y-6" @submit.prevent="login">
           <div>
             <label for="email" class="text-sm font-semibold leading-6"
               >Email address</label
@@ -33,6 +33,7 @@
                 id="email"
                 name="email"
                 type="email"
+                v-model="email"
                 autocomplete="email"
                 placeholder="name@example.com"
                 required
@@ -52,6 +53,7 @@
                 id="password"
                 name="password"
                 type="password"
+                v-model="password"
                 autocomplete="current-password"
                 placeholder="********"
                 required
@@ -84,6 +86,37 @@
   </div>
 </template>
 
-<script setup>
+<script>
 import { RouterLink } from "vue-router";
+import axios from '@/services/axios.js';
+
+
+export default {
+  data() {
+    return {
+      email: '',
+      password: ''
+    };
+  },
+
+methods: {
+  login() {
+    const userData = {
+      email: this.email,
+      password: this.password
+    };
+
+    axios.post('/v1/login', userData)
+        .then(response => {
+          // TODO: Add a status message or dialog with spinner   that indicates the login was successful before th user will be redirected to the home page.
+          console.log('Login successful:', response.data);
+          this.$router.push('/');
+
+        })
+        .catch(error => {
+          console.error('Login error:', error.response ? error.response.data : 'Unknown error');
+        });
+  }
+}
+}
 </script>

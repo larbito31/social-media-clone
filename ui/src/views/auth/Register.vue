@@ -23,7 +23,7 @@
       <div class="relative mt-10 w-full">
         <!-- User Details -->
 
-        <form class="space-y-6">
+        <form class="space-y-6" @submit.prevent="register">
           <div>
             <label for="username" class="text-sm font-semibold leading-6"
               >Full Name</label
@@ -33,6 +33,7 @@
                 id="username"
                 name="username"
                 type="text"
+                v-model="username"
                 placeholder="Your Name"
                 required
                 class="w-full rounded-md border-0 p-1.5 shadow-sm ring-1 ring-slate-300 placeholder:text-slate-400 focus:outline-none focus:ring-2 focus:ring-indigo-600 sm:text-sm sm:leading-6"
@@ -48,6 +49,7 @@
                 id="email"
                 name="email"
                 type="email"
+                v-model="email"
                 autocomplete="email"
                 placeholder="name@example.com"
                 required
@@ -67,6 +69,7 @@
                 id="password"
                 name="password"
                 type="password"
+                v-model="password"
                 autocomplete="current-password"
                 placeholder="********"
                 required
@@ -99,6 +102,40 @@
   </div>
 </template>
 
-<script setup>
+<script>
 import { RouterLink } from "vue-router";
+import axios from '@/services/axios.js';
+
+
+
+export default {
+  data() {
+    return {
+      email: '',
+      password: '',
+      username: ''
+    };
+  },
+
+  methods: {
+    register() {
+      const userData = {
+        name: this.username,
+        email: this.email,
+        password: this.password
+      };
+
+      axios.post('/v1/register', userData)
+          .then(response => {
+            // TODO: Add a status message dialog or whatever  that indicates the register was successful before th user will be redirected to the login page .
+            console.log('Login successful:', response.data);
+            this.$router.push('/login');
+
+          })
+          .catch(error => {
+            console.error('Login error:', error.response ? error.response.data : 'Unknown error');
+          });
+    }
+  }
+}
 </script>
