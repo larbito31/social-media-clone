@@ -21,7 +21,7 @@ class AuthController extends Controller
      * @param Request $request
      * @return JsonResponse
      */
-    public function login(Request $request)
+    public function login(Request $request): JsonResponse
     {
         $request->validate([
             'email' => 'required|string|email',
@@ -49,7 +49,8 @@ class AuthController extends Controller
      * @param Request $request
      * @return JsonResponse
      */
-    public function register(Request $request){
+    public function register(Request $request): JsonResponse
+    {
         $request->validate([
             'name' => 'required|string|max:255',
             'email' => 'required|string|email|max:255|unique:users',
@@ -89,7 +90,7 @@ class AuthController extends Controller
      * refresh jwt
      * @return JsonResponse
      */
-    public function refresh()
+    public function refresh(): JsonResponse
     {
         return response()->json([
             'status' => 'ok',
@@ -101,7 +102,7 @@ class AuthController extends Controller
      * we use this to check if the user is authenticated or not
      * @return JsonResponse
      */
-    public function checkAuth()
+    public function checkAuth(): JsonResponse
     {
             return response()->json([
                 'isAuthenticated' => true,
