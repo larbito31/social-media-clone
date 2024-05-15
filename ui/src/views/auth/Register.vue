@@ -127,7 +127,7 @@ export default {
 
       axios.post('/v1/register', userData)
           .then(response => {
-            // TODO: Add a status message dialog or whatever that indicates the register was successful before th user will be redirected to the login page .
+            // TODO: Add a status message dialog or whatever  that indicates the register was successful before th user will be redirected to the login page .
             console.log('Login successful:', response.data);
             this.$router.push('/login');
 
