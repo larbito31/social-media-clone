@@ -3,7 +3,7 @@ import axios from 'axios';
 // Create a global Axios instance to include default settings
 // such as headers and `withCredentials: true`, eliminating the need to specify these settings in every Axios request.
 const instance = axios.create({
-    baseURL: 'http://localhost:8000/api',
+    baseURL: 'http://51.68.172.157/api',
     withCredentials: true,
     headers: {
         'Accept': 'application/json'
