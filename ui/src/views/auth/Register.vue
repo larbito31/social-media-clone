@@ -92,7 +92,7 @@
           Already have an account?
           <RouterLink
             to="/login"
-            class="inline-flex font-semibold leading-6 text-indigo-600 hover:text-indigo-500"
+            class="inline-flex font-semibold leading-6 text-indigo-600 hover:text-indigo-500 underline"
           >
             Login!
           </RouterLink>
