@@ -14,7 +14,7 @@ Route::prefix('v1')->group(function () {
     });
 
     // Routes that require authentication
-    Route::middleware(['jwt.cookie','jwt.auth'])->group(function () {
+    Route::middleware(['jwt.auth'])->group(function () {
         Route::controller(AuthController::class)->group(function () {
             Route::post('logout', 'logout');
             Route::post('refresh', 'refresh');

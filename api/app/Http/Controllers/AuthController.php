@@ -41,7 +41,7 @@ class AuthController extends Controller
         return response()->json([
             'status' => 'ok',
             'token' => $token
-        ])->withCookie($cookie);
+        ]);
     }
 
     /**
@@ -83,7 +83,7 @@ class AuthController extends Controller
         return response()->json([
             'status' => 'ok',
             'message' => 'Successfully logged out',
-        ])->withCookie($cookie);
+        ]);
     }
 
     /**
