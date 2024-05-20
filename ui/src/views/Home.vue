@@ -1,4 +1,5 @@
 <template>
+
   <div class="flex h-screen items-center justify-center">
     <div class="flex flex-col items-center justify-center">
       <img
@@ -10,6 +11,10 @@
       <h1 class="text-xl font-light italic tracking-widest text-indigo-600">
         Grow Fruitful Connections!
       </h1>
+      <logout-button></logout-button>
     </div>
   </div>
 </template>
+<script setup>
+import LogoutButton from "@/views/components/LogoutButton.vue";
+</script>

@@ -3,19 +3,27 @@ import axios from 'axios';
 // Create a global Axios instance to include default settings
 // such as headers and `withCredentials: true`, eliminating the need to specify these settings in every Axios request.
 const instance = axios.create({
-    baseURL: 'http://localhost:8000/api',
+    baseURL: 'http://51.68.172.157/api',
     withCredentials: true,
     headers: {
         'Accept': 'application/json'
     }
 });
 
-
 //TODO: if we need later to do the handling errors globally
 
 // Setup interceptors if needed, e.g., for adding tokens or handling errors globally
 instance.interceptors.request.use(config => {
     // Perform actions before every request is sent
+
+    // Retrieve the token from local storage
+    const token = localStorage.getItem('jwt');
+
+    // If the token exists, add it to the headers
+    if (token) {
+        config.headers.Authorization = `Bearer ${token}`;
+    }
+
     return config;
 }, error => {
     // Handle errors
