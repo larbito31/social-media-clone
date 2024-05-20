@@ -110,6 +110,7 @@ methods: {
         .then(response => {
           // TODO: Add a status message or dialog with spinner   that indicates the login was successful before th user will be redirected to the home page.
           console.log('Login successful:', response.data);
+          localStorage.setItem('jwt', response.data.token);
           this.$router.push('/');
 
         })

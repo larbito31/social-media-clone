@@ -10,12 +10,20 @@ const instance = axios.create({
     }
 });
 
-
 //TODO: if we need later to do the handling errors globally
 
 // Setup interceptors if needed, e.g., for adding tokens or handling errors globally
 instance.interceptors.request.use(config => {
     // Perform actions before every request is sent
+
+    // Retrieve the token from local storage
+    const token = localStorage.getItem('jwt');
+
+    // If the token exists, add it to the headers
+    if (token) {
+        config.headers.Authorization = `Bearer ${token}`;
+    }
+
     return config;
 }, error => {
     // Handle errors
