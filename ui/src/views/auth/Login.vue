@@ -1,5 +1,5 @@
 <template>
-  <div class="flex h-screen items-center justify-center bg-white py-12">
+  <div class="flex h-screen items-center justify-center py-12">
     <div
       class="flex flex-col justify-center rounded-lg bg-slate-50 px-6 py-12 text-slate-800 sm:mx-auto sm:w-full sm:max-w-md lg:px-8"
     >
@@ -88,36 +88,38 @@
 
 <script>
 import { RouterLink } from "vue-router";
-import axios from '@/services/axios.js';
-
+import axios from "@/services/axios.js";
 
 export default {
   data() {
     return {
-      email: '',
-      password: ''
+      email: "",
+      password: "",
     };
   },
 
-methods: {
-  login() {
-    const userData = {
-      email: this.email,
-      password: this.password
-    };
+  methods: {
+    login() {
+      const userData = {
+        email: this.email,
+        password: this.password,
+      };
 
-    axios.post('/v1/login', userData)
-        .then(response => {
+      axios
+        .post("/v1/login", userData)
+        .then((response) => {
           // TODO: Add a status message or dialog with spinner   that indicates the login was successful before th user will be redirected to the home page.
-          console.log('Login successful:', response.data);
-          localStorage.setItem('jwt', response.data.token);
-          this.$router.push('/');
-
+          console.log("Login successful:", response.data);
+          localStorage.setItem("jwt", response.data.token);
+          this.$router.push("/");
         })
-        .catch(error => {
-          console.error('Login error:', error.response ? error.response.data : 'Unknown error');
+        .catch((error) => {
+          console.error(
+            "Login error:",
+            error.response ? error.response.data : "Unknown error",
+          );
         });
-  }
-}
-}
+    },
+  },
+};
 </script>

@@ -1,5 +1,5 @@
 <template>
-  <div class="flex h-screen items-center justify-center bg-white py-12">
+  <div class="flex h-screen items-center justify-center py-12">
     <div
       class="flex flex-col justify-center rounded-lg bg-slate-50 px-6 py-12 text-slate-800 sm:mx-auto sm:w-full sm:max-w-md lg:px-8"
     >
@@ -92,7 +92,7 @@
           Already have an account?
           <RouterLink
             to="/login"
-            class="inline-flex font-semibold leading-6 text-indigo-600 hover:text-indigo-500 underline"
+            class="inline-flex font-semibold leading-6 text-indigo-600 underline hover:text-indigo-500"
           >
             Login!
           </RouterLink>
@@ -104,16 +104,14 @@
 
 <script>
 import { RouterLink } from "vue-router";
-import axios from '@/services/axios.js';
-
-
+import axios from "@/services/axios.js";
 
 export default {
   data() {
     return {
-      email: '',
-      password: '',
-      username: ''
+      email: "",
+      password: "",
+      username: "",
     };
   },
 
@@ -122,20 +120,23 @@ export default {
       const userData = {
         name: this.username,
         email: this.email,
-        password: this.password
+        password: this.password,
       };
 
-      axios.post('/v1/register', userData)
-          .then(response => {
-            // TODO: Add a status message dialog or whatever  that indicates the register was successful before th user will be redirected to the login page .
-            console.log('Login successful:', response.data);
-            this.$router.push('/login');
-
-          })
-          .catch(error => {
-            console.error('Login error:', error.response ? error.response.data : 'Unknown error');
-          });
-    }
-  }
-}
+      axios
+        .post("/v1/register", userData)
+        .then((response) => {
+          // TODO: Add a status message dialog or whatever  that indicates the register was successful before th user will be redirected to the login page .
+          console.log("Login successful:", response.data);
+          this.$router.push("/login");
+        })
+        .catch((error) => {
+          console.error(
+            "Login error:",
+            error.response ? error.response.data : "Unknown error",
+          );
+        });
+    },
+  },
+};
 </script>
